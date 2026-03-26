@@ -1,0 +1,433 @@
+digraph "RAG Chatbot Architecture - MVP
+(Azure-Native with Azure AI Search)" {
+	graph [bb="0,0,1526.2,1742.8",
+		bgcolor=white,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=14,
+		label="RAG Chatbot Architecture - MVP
+(Azure-Native with Azure AI Search)",
+		lheight=0.48,
+		lp="763.12,21.25",
+		lwidth=3.08,
+		nodesep=0.8,
+		pad=0.5,
+		rankdir=TB,
+		ranksep=1.0,
+		splines=ortho
+	];
+	node [fixedsize=true,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		height=1.4,
+		imagescale=true,
+		label="\N",
+		labelloc=b,
+		shape=box,
+		style=rounded,
+		width=1.4
+	];
+	edge [color="#7B8894"];
+	subgraph "cluster_Chat Interface" {
+		graph [bb="77,588.5,366,808.6",
+			bgcolor="#E8F5E9",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="Chat Interface",
+			labeljust=l,
+			lheight=0.23,
+			lp="125.5,796.35",
+			lwidth=1.12,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		"1628efe0c2954ed2bbd109e9939c9afb"	[height=1.9,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/saas/chat\teams.png",
+			label="Teams Chat",
+			pos="142,686.3",
+			shape=none];
+		"88f1878f21354165b91962a23ff407ba"	[height=2.3,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/compute\app-services.png",
+			label="Web App
+Chat UI",
+			pos="301,686.3",
+			shape=none];
+	}
+	subgraph "cluster_RAG Orchestration" {
+		graph [bb="714,260.3,851,837.4",
+			bgcolor="#E3F2FD",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="RAG Orchestration",
+			labeljust=l,
+			lheight=0.23,
+			lp="774.88,825.15",
+			lwidth=1.47,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		"3c3390df7a8f4c459a35058655f6748d"	[height=3.1,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/compute\function-apps.png",
+			label="RAG Orchestrator
+(Azure Functions)
+LangChain/
+Semantic Kernel",
+			pos="786,686.3",
+			shape=none];
+		"79486ae9fe9945729ded4f8723f91c52"	[height=2.7,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/database\cache-for-redis.png",
+			label="Query Cache
+(Redis)
+Optional",
+			pos="786,372.5",
+			shape=none];
+		"3c3390df7a8f4c459a35058655f6748d" -> "79486ae9fe9945729ded4f8723f91c52"	[dir=forward,
+			fontcolor="#2D3436",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="1. Cache
+Check",
+			lp="811.38,522.2",
+			pos="e,769.2,469.6 769.2,574.78 769.2,574.78 769.2,481.12 769.2,481.12",
+			style=dashed];
+	}
+	subgraph "cluster_Azure AI Search
+(Managed Vector DB)" {
+		graph [bb="1194,559.7,1333,853.9",
+			bgcolor="#E1F5FE",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="Azure AI Search
+(Managed Vector DB)",
+			labeljust=l,
+			lheight=0.46,
+			lp="1263.5,833.4",
+			lwidth=1.71,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		"5058010f0ec841c1955a7d8e5b47fe25"	[height=3.1,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/aimachinelearning\cognitive-search.png",
+			label="Azure AI Search
+• Hybrid Search
+• Semantic Ranking
+• Integrated Vectors",
+			pos="1263,686.3",
+			shape=none];
+	}
+	subgraph "cluster_Ingestion Pipeline
+(Built into AI Search)" {
+		graph [bb="1225,1198.8,1361,1734.8",
+			bgcolor="#FFF3E0",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="Ingestion Pipeline
+(Built into AI Search)",
+			labeljust=l,
+			lheight=0.46,
+			lp="1293,1714.3",
+			lwidth=1.67,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		e6acece668644193bbfdcbbc6d3d5dcc	[height=2.7,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/compute\function-apps.png",
+			label="AI Search Indexer
+(Auto Chunking)
+(Auto Vectorization)",
+			pos="1296,1311",
+			shape=none];
+		af6b7df3cb6342c48c47841299fe9c69	[height=2.3,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/storage\blob-storage.png",
+			label="Blob Storage
+(Optional Staging)",
+			pos="1293,1596",
+			shape=none];
+		af6b7df3cb6342c48c47841299fe9c69 -> e6acece668644193bbfdcbbc6d3d5dcc	[dir=forward,
+			fontcolor="#2D3436",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="Blob
+Indexer",
+			lp="1319.8,1460.7",
+			pos="e,1294.5,1408.1 1294.5,1513.6 1294.5,1513.6 1294.5,1419.6 1294.5,1419.6"];
+	}
+	subgraph "cluster_Security & Auth" {
+		graph [bb="390,274.7,679,494.8",
+			bgcolor="#ECEFF1",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label="Security & Auth",
+			labeljust=l,
+			lheight=0.23,
+			lp="443,482.55",
+			lwidth=1.25,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		"79f4ed13686f4929ba69964269c8f458"	[height=2.3,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/identity\entra-connect.png",
+			label="Microsoft
+Entra ID",
+			pos="455,372.5",
+			shape=none];
+		"77f31bd637cc4fe38ce06b3a8a6ceeed"	[height=2.3,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/identity\managed-identities.png",
+			label="Managed
+Identities",
+			pos="614,372.5",
+			shape=none];
+	}
+	subgraph cluster_Observability {
+		graph [bb="1292,50.5,1422,494.8",
+			bgcolor="#FFF9C4",
+			fontname="Sans-Serif",
+			fontsize=13,
+			label=Observability,
+			labeljust=l,
+			lheight=0.23,
+			lp="1337.1,482.55",
+			lwidth=1.03,
+			margin=15,
+			pencolor="#AEB6BE",
+			rankdir=LR,
+			shape=box,
+			style=rounded
+		];
+		"360c45a9c27e477eb9a8f8374ad177ce"	[height=2.3,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/devops\application-insights.png",
+			label="Application
+Insights",
+			pos="1357,372.5",
+			shape=none];
+		"531bcd5d6a6e4cb197cbf244bb755ba4"	[height=1.9,
+			image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/analytics\log-analytics-workspaces.png",
+			label="Log Analytics",
+			pos="1357,133.9",
+			shape=none];
+		"360c45a9c27e477eb9a8f8374ad177ce" -> "531bcd5d6a6e4cb197cbf244bb755ba4"	[dir=forward,
+			fontcolor="#2D3436",
+			fontname="Sans-Serif",
+			fontsize=13,
+			pos="e,1357,201.92 1357,289.72 1357,289.72 1357,213.44 1357,213.44"];
+	}
+	"2e0e2dd46ef74e319c88ab468885cd3c"	[height=2.3,
+		image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/onprem/client\users.png",
+		label="Users
+(≈50)",
+		pos="222,1011.6",
+		shape=none];
+	"2e0e2dd46ef74e319c88ab468885cd3c" -> "1628efe0c2954ed2bbd109e9939c9afb"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=Chat,
+		lp="173.12,870.15",
+		pos="e,182,754.46 182,929.09 182,929.09 182,765.97 182,765.97"];
+	"2e0e2dd46ef74e319c88ab468885cd3c" -> "88f1878f21354165b91962a23ff407ba"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=Chat,
+		lp="279.12,870.15",
+		pos="e,261.5,769 261.5,929.09 261.5,929.09 261.5,780.52 261.5,780.52"];
+	d12c74a5f38241e6992631bb5cb9c482	[height=2.3,
+		image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/integration\api-management.png",
+		label="API Gateway
+(Optional)",
+		pos="153,372.5",
+		shape=none];
+	"1628efe0c2954ed2bbd109e9939c9afb" -> d12c74a5f38241e6992631bb5cb9c482	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=HTTPS,
+		lp="19.5,522.2",
+		pos="e,132.53,455.24 132.53,618.21 132.53,618.21 132.53,466.75 132.53,466.75"];
+	"1628efe0c2954ed2bbd109e9939c9afb" -> "79f4ed13686f4929ba69964269c8f458"	[color=gray,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="User Auth",
+		lp="351.12,522.2",
+		pos="e,438.2,455.24 162.47,618.08 162.47,600.53 162.47,586.5 162.47,586.5 162.47,586.5 438.2,586.5 438.2,586.5 438.2,586.5 438.2,466.75 \
+438.2,466.75",
+		style=dashed];
+	"88f1878f21354165b91962a23ff407ba" -> d12c74a5f38241e6992631bb5cb9c482	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=HTTPS,
+		lp="121.5,522.2",
+		pos="e,195.15,455.07 250.86,610.5 223.51,610.5 195.15,610.5 195.15,610.5 195.15,610.5 195.15,466.59 195.15,466.59"];
+	"88f1878f21354165b91962a23ff407ba" -> "79f4ed13686f4929ba69964269c8f458"	[color=gray,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="User Auth",
+		lp="470.12,522.2",
+		pos="e,471.8,455 351.32,686.5 401.7,686.5 471.8,686.5 471.8,686.5 471.8,686.5 471.8,466.51 471.8,466.51",
+		style=dashed];
+	d12c74a5f38241e6992631bb5cb9c482 -> "3c3390df7a8f4c459a35058655f6748d"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=Request,
+		lp="584.62,522.2",
+		pos="e,735.84,591.5 200.65,455.29 200.65,517.31 200.65,591.5 200.65,591.5 200.65,591.5 724.33,591.5 724.33,591.5"];
+	"3c3390df7a8f4c459a35058655f6748d" -> d12c74a5f38241e6992631bb5cb9c482	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=Response,
+		lp="231.75,522.2",
+		pos="e,197.9,455 735.6,597.5 593.17,597.5 197.9,597.5 197.9,597.5 197.9,597.5 197.9,466.52 197.9,466.52"];
+	"3c3390df7a8f4c459a35058655f6748d" -> "5058010f0ec841c1955a7d8e5b47fe25"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="2. Hybrid Search
++ Semantic Rank",
+		lp="281,50.5",
+		pos="e,1212.8,753.5 836.15,753.5 836.15,753.5 1201.3,753.5 1201.3,753.5"];
+	"667b456a29aa4ce3ab4050ea958b4baa"	[height=2.3,
+		image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/ml\azure-open-ai.png",
+		label="Azure OpenAI
+GPT-4o / 4.1",
+		pos="988,372.5",
+		shape=none];
+	"3c3390df7a8f4c459a35058655f6748d" -> "667b456a29aa4ce3ab4050ea958b4baa"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="4. Prompt +
+Context",
+		lp="933.88,522.2",
+		pos="e,1004.8,455.11 836.2,663.5 900.79,663.5 1004.8,663.5 1004.8,663.5 1004.8,663.5 1004.8,466.62 1004.8,466.62"];
+	"3c3390df7a8f4c459a35058655f6748d" -> "77f31bd637cc4fe38ce06b3a8a6ceeed"	[color=gray,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="Managed
+Identity",
+		lp="697.25,522.2",
+		pos="e,597.2,455.01 735.9,580.5 679.97,580.5 597.2,580.5 597.2,580.5 597.2,580.5 597.2,466.52 597.2,466.52",
+		style=dashed];
+	"3c3390df7a8f4c459a35058655f6748d" -> "360c45a9c27e477eb9a8f8374ad177ce"	[color=orange,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=traces,
+		lp="1182.2,522.2",
+		pos="e,1324.4,454.97 802.8,574.79 802.8,537.16 802.8,504.5 802.8,504.5 802.8,504.5 1324.4,504.5 1324.4,504.5 1324.4,504.5 1324.4,466.49 \
+1324.4,466.49",
+		style=dashed];
+	"5058010f0ec841c1955a7d8e5b47fe25" -> "3c3390df7a8f4c459a35058655f6748d"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="3. Top-K
+Chunks",
+		lp="281,50.5",
+		pos="e,836.19,708.5 1212.9,708.5 1212.9,708.5 847.7,708.5 847.7,708.5"];
+	"5058010f0ec841c1955a7d8e5b47fe25" -> "77f31bd637cc4fe38ce06b3a8a6ceeed"	[color=gray,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=RBAC,
+		lp="1278.4,522.2",
+		pos="e,630.8,455.02 1259.6,575.04 1259.6,554.56 1259.6,539.5 1259.6,539.5 1259.6,539.5 630.8,539.5 630.8,539.5 630.8,539.5 630.8,466.54 \
+630.8,466.54",
+		style=dashed];
+	"5058010f0ec841c1955a7d8e5b47fe25" -> "360c45a9c27e477eb9a8f8374ad177ce"	[color=orange,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=metrics,
+		lp="1378,522.2",
+		pos="e,1335.4,455 1313.3,686.5 1325.6,686.5 1335.4,686.5 1335.4,686.5 1335.4,686.5 1335.4,466.51 1335.4,466.51",
+		style=dashed];
+	"10bc2ee3a21a498c803269f7a92966a8"	[height=2.7,
+		image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/ml\azure-open-ai.png",
+		label="Azure OpenAI
+Embeddings
+(text-embedding-3)",
+		pos="1296,1011.6",
+		shape=none];
+	"10bc2ee3a21a498c803269f7a92966a8" -> "5058010f0ec841c1955a7d8e5b47fe25"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=Vectors,
+		lp="1300,870.15",
+		pos="e,1279.5,797.81 1279.5,914.44 1279.5,914.44 1279.5,809.32 1279.5,809.32"];
+	"667b456a29aa4ce3ab4050ea958b4baa" -> "3c3390df7a8f4c459a35058655f6748d"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="5. Answer +
+Citations",
+		lp="1066.9,522.2",
+		pos="e,836.12,619.5 971.2,455.09 971.2,526.9 971.2,619.5 971.2,619.5 971.2,619.5 847.63,619.5 847.63,619.5"];
+	"4f37f121136d4ef7bd78045ae3ec0374"	[height=2.3,
+		image="C:\Users\VironGilEstrada\OneDrive - Afni Inc\Desktop\chatbot-rag\.venv\Lib\site-packages\resources/azure/aimachinelearning\cognitive-search.png",
+		label="SharePoint Online
+Document Libraries",
+		pos="1452,1596",
+		shape=none];
+	"4f37f121136d4ef7bd78045ae3ec0374" -> e6acece668644193bbfdcbbc6d3d5dcc	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="Graph API
+(via Indexer)",
+		lp="1489.1,1460.7",
+		pos="e,1346.3,1278.5 1454.9,1513.4 1454.9,1419.3 1454.9,1278.5 1454.9,1278.5 1454.9,1278.5 1357.8,1278.5 1357.8,1278.5"];
+	e6acece668644193bbfdcbbc6d3d5dcc -> "5058010f0ec841c1955a7d8e5b47fe25"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="Auto
+Chunk",
+		lp="1169.4,1011.6",
+		pos="e,1227.6,797.71 1245.9,1311.5 1235.5,1311.5 1227.6,1311.5 1227.6,1311.5 1227.6,1311.5 1227.6,809.23 1227.6,809.23"];
+	e6acece668644193bbfdcbbc6d3d5dcc -> "10bc2ee3a21a498c803269f7a92966a8"	[dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label="Auto
+Embed",
+		lp="1316.2,1161.3",
+		pos="e,1296,1108.6 1296,1214.2 1296,1214.2 1296,1120.1 1296,1120.1"];
+	e6acece668644193bbfdcbbc6d3d5dcc -> "360c45a9c27e477eb9a8f8374ad177ce"	[color=orange,
+		dir=forward,
+		fontcolor="#2D3436",
+		fontname="Sans-Serif",
+		fontsize=13,
+		label=logs,
+		lp="1445.6,870.15",
+		pos="e,1374,455.29 1346.3,1343.5 1361.4,1343.5 1374,1343.5 1374,1343.5 1374,1343.5 1374,466.8 1374,466.8",
+		style=dashed];
+}
